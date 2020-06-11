@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		757B36EC247F864E00BB9833 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B36EB247F864E00BB9833 /* AVPlayerView.swift */; };
+		757BC6982477A6F500BDEC6A /* TvOSAVPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757BC6942477A66B00BDEC6A /* TvOSAVPlayer.xib */; };
+		757BC69A247BDB8200BDEC6A /* TvOSSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757BC699247BDB8200BDEC6A /* TvOSSlider.swift */; };
+		757BC69B247BDFF700BDEC6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75ED4DB92476636100FDA6AA /* Assets.xcassets */; };
 		OBJ_22 /* TvOSAVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* TvOSAVPlayer.swift */; };
 		OBJ_29 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_40 /* TvOSAVPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* TvOSAVPlayerTests.swift */; };
@@ -46,8 +50,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		757B36EB247F864E00BB9833 /* AVPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
+		757BC6942477A66B00BDEC6A /* TvOSAVPlayer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TvOSAVPlayer.xib; sourceTree = "<group>"; };
+		757BC699247BDB8200BDEC6A /* TvOSSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TvOSSlider.swift; sourceTree = "<group>"; };
 		75ED4DB92476636100FDA6AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		75ED4DBA247663FF00FDA6AA /* TvOSAVPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TvOSAVPlayer.xib; sourceTree = "<group>"; };
 		OBJ_12 /* TvOSAVPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvOSAVPlayerTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -102,7 +108,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				75ED4DB92476636100FDA6AA /* Assets.xcassets */,
@@ -111,7 +117,6 @@
 				OBJ_10 /* Tests */,
 				OBJ_14 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -125,8 +130,10 @@
 		OBJ_8 /* TvOSAVPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				757BC699247BDB8200BDEC6A /* TvOSSlider.swift */,
+				757B36EB247F864E00BB9833 /* AVPlayerView.swift */,
 				OBJ_9 /* TvOSAVPlayer.swift */,
-				75ED4DBA247663FF00FDA6AA /* TvOSAVPlayer.xib */,
+				757BC6942477A66B00BDEC6A /* TvOSAVPlayer.xib */,
 			);
 			name = TvOSAVPlayer;
 			path = Sources/TvOSAVPlayer;
@@ -155,6 +162,7 @@
 			buildPhases = (
 				OBJ_21 /* Sources */,
 				OBJ_23 /* Frameworks */,
+				757BC6972477A6ED00BDEC6A /* Resources */,
 			);
 			buildRules = (
 			);
@@ -198,7 +206,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_14 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -211,11 +219,25 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		757BC6972477A6ED00BDEC6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				757BC69B247BDFF700BDEC6A /* Assets.xcassets in Resources */,
+				757BC6982477A6F500BDEC6A /* TvOSAVPlayer.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		OBJ_21 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				757B36EC247F864E00BB9833 /* AVPlayerView.swift in Sources */,
+				757BC69A247BDB8200BDEC6A /* TvOSSlider.swift in Sources */,
 				OBJ_22 /* TvOSAVPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Example-tvOS/Example-tvOS.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:TvOSAVPlayer.xcodeproj">
    </FileRef>
    <FileRef
