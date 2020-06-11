@@ -38,14 +38,20 @@ public class TvOSAVPlayer: UIView {
     convenience public init(frame: CGRect, fileUrl: URL) {
         self.init(frame: frame)
         self.fileURL = fileUrl
+        print("init method called")
         setUpView()
     }
     
     func setUpView() {
         let view = loadViewFromNib()
-        view.frame = self.bounds
-        view.backgroundColor = UIColor.orange
-        self.addSubview(view)
+        if view != nil  {
+            print("view loaded")
+        } else {
+            print("view not loaded")
+        }
+        view?.frame = self.bounds
+        view?.backgroundColor = UIColor.orange
+        self.addSubview(view!)
     }
 
     required init?(coder: NSCoder) {
@@ -65,8 +71,9 @@ public class TvOSAVPlayer: UIView {
         seekBarSlider.backgroundColor = UIColor.clear
     }
 
-    private func loadViewFromNib() -> TvOSAVPlayer {
-        let bundle = Bundle(for: TvOSAVPlayer.self)
+    private func loadViewFromNib() -> TvOSAVPlayer? {
+        let bundle = Bundle(identifier: "TvOSAVPlayer") //Bundle(for: TvOSAVPlayer.self)
+        print("bundle: \(String(describing: bundle))")
         let nib = UINib(nibName: "\(TvOSAVPlayer.self)", bundle: bundle)
         let nibView = nib.instantiate(withOwner: self, options: nil).first as! TvOSAVPlayer
         
@@ -147,7 +154,8 @@ extension TvOSAVPlayer {
         
         playingStatus = !playingStatus
 
-        let bundle = Bundle(for: TvOSAVPlayer.self)
+//        let bundle = Bundle(for: TvOSAVPlayer.self)
+        let bundle = Bundle(identifier: "TvOSAVPlayer")
         
         guard let avPlayerLayer = self.avPlayerView.layer as? AVPlayerLayer else {
             return
