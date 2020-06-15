@@ -17,11 +17,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+//        self.view.backgroundColor = UIColor.red
+        
 //        let videoURL = URL(string: "https://liveproduseast.global.ssl.fastly.net/btv/desktop/us_live.m3u8")
         let videoURL = URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
 
         avPlayer = TvOSAVPlayer(frame: CGRect(x: 10, y: 10, width: 1500, height: 833), fileUrl: videoURL!)
-        avPlayer.backgroundColor = UIColor.green
+        avPlayer.backgroundColor = UIColor.orange
         self.view.addSubview(avPlayer)
     }
 }

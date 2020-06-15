@@ -49,9 +49,6 @@
                                     <state key="normal" backgroundImage="10secBackward">
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tenSecBackwardAction:" destination="iN0-l3-epB" eventType="primaryActionTriggered" id="Hb4-dJ-6p7"/>
-                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSu-me-jl5">
                                     <rect key="frame" x="447.5" y="21" width="42" height="42"/>
@@ -62,9 +59,6 @@
                                     <state key="normal" backgroundImage="pause">
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
-                                    <connections>
-                                        <action selector="playPauseAction:" destination="iN0-l3-epB" eventType="primaryActionTriggered" id="fTY-Fp-E40"/>
-                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khB-3X-Sdd">
                                     <rect key="frame" x="519.5" y="17" width="50" height="50"/>
@@ -72,9 +66,6 @@
                                     <state key="normal" backgroundImage="10secForward">
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
-                                    <connections>
-                                        <action selector="tenSecForwardAction:" destination="iN0-l3-epB" eventType="primaryActionTriggered" id="Wpe-i4-C1a"/>
-                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0Y-95-YqV">
                                     <rect key="frame" x="875" y="21" width="42" height="42"/>
@@ -82,9 +73,6 @@
                                     <state key="normal" backgroundImage="fullScreen">
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
-                                    <connections>
-                                        <action selector="fullScreenAction:" destination="iN0-l3-epB" eventType="primaryActionTriggered" id="EcI-Sc-BIq"/>
-                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -141,17 +129,6 @@
                 <constraint firstItem="aNr-fJ-VRo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yVu-Lk-iO4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Pmt-tb-8Ig"/>
-            <connections>
-                <outlet property="avPlayerView" destination="aNr-fJ-VRo" id="N6n-5I-Hd7"/>
-                <outlet property="controlsView" destination="ENa-oy-83K" id="Vod-KB-Cma"/>
-                <outlet property="currentDurationLbl" destination="NgG-jF-su4" id="ny7-WG-zgU"/>
-                <outlet property="fullScreenButton" destination="h0Y-95-YqV" id="6L7-8Z-kJC"/>
-                <outlet property="playOrPauseButton" destination="TSu-me-jl5" id="SpG-B1-EPr"/>
-                <outlet property="seekBarSlider" destination="hxH-jw-MJW" id="gVP-kc-lng"/>
-                <outlet property="tenSecBackwardButton" destination="YjL-rz-NvQ" id="PMt-X9-hS6"/>
-                <outlet property="tenSecForwardButton" destination="khB-3X-Sdd" id="01T-yg-s5w"/>
-                <outlet property="totalDurationLbl" destination="ef9-R0-pj9" id="ICs-Co-3iO"/>
-            </connections>
             <point key="canvasLocation" x="69" y="132"/>
         </view>
     </objects>
@@ -159,6 +136,6 @@
         <image name="10secBackward" width="90" height="90"/>
         <image name="10secForward" width="90" height="90"/>
         <image name="fullScreen" width="64" height="64"/>
-        <image name="pause" width="64" height="64"/>
+        <image name="pause" width="48" height="48"/>
     </resources>
 </document>
