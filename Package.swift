@@ -21,7 +21,7 @@ let package = Package(
         .target(
             name: "TvOSAVPlayer",
             dependencies: [],
-            resources: [.process(Images]),
+            resources: [.process(Images)]),
         .testTarget(
             name: "TvOSAVPlayerTests",
             dependencies: ["TvOSAVPlayer"]),
