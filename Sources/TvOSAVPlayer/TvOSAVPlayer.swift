@@ -9,11 +9,6 @@
 import UIKit
 import AVKit
 
-extension Bundle {
-    /// The bundle associated with the current Swift module.
-    static let module: Bundle = Bundle()
-}
-
 public class TvOSAVPlayer: UIView {
 
     var containerView: UIView!
@@ -37,6 +32,12 @@ public class TvOSAVPlayer: UIView {
     fileprivate let seekDuration: Float64 = 10
     fileprivate var currentValue: Float = 0
 
+    var playImage: UIImage?
+    var pauseImage: UIImage?
+    var forwardImage: UIImage?
+    var backwardImage: UIImage?
+    var fullScreenImage: UIImage?
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -52,48 +53,36 @@ public class TvOSAVPlayer: UIView {
     }
     
     func setUpView(fileUrl: URL) {
-        let frame = CGRect(x: 10, y: 10, width: self.bounds.size.width - 20, height: self.bounds.size.height - 20)
-        containerView = UIView(frame: frame)
+        containerView = UIView(frame: self.bounds)
         containerView.backgroundColor = UIColor.lightGray
         self.addSubview(containerView)
         
-        setUpPlayerView(fileUrl: fileUrl)
         setUpControlsView()
-
-//        let view = loadViewFromNib()
-//        if view != nil  {
-//            print("view loaded")
-//        } else {
-//            print("view not loaded")
-//        }
-//        view?.frame = self.bounds
-//        view?.backgroundColor = UIColor.orange
-//        self.addSubview(view!)
+        setUpPlayerView(fileUrl: fileUrl)
     }
 
     func setUpPlayerView(fileUrl: URL) {
         
         avPlayerView = AVPlayerView(frame: containerView.bounds)
-        containerView.addSubview(avPlayerView)
-        
-//        let playerItem = AVPlayerItem(url: fileURL!)
-//        avPlayer = AVPlayer(playerItem: playerItem)
-//        let playerLayer = avPlayerView.layer as! AVPlayerLayer
-//        playerLayer.player = avPlayer
-//        avPlayer.play()
+        containerView.insertSubview(avPlayerView, at: 0)
 
-//        let duration: CMTime = playerItem.asset.duration
+        let playerItem = AVPlayerItem(url: fileURL!)
+        avPlayer = AVPlayer(playerItem: playerItem)
+        let playerLayer = avPlayerView.layer as! AVPlayerLayer
+        playerLayer.player = avPlayer
+        avPlayer.play()
 
-//        nibView.totalDurationLbl.text = getFormatedDateString(duration: duration)
-//        nibView.currentDurationLbl.text = "00:00:00"
-//
-//        nibView.seekBarSlider.maximumValue = Float(CMTimeGetSeconds(duration))
-//
-//        player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] (time) -> Void in
-//            nibView.currentDurationLbl.text = self?.getFormatedDateString(duration: time)
-//            self?.updateSlider(duration: time)
-//        }
-        
+        let duration: CMTime = playerItem.asset.duration
+
+        totalDurationLbl.text = getFormatedDateString(duration: duration)
+        currentDurationLbl.text = "00:00"
+
+        seekBarSlider.maximumValue = Float(CMTimeGetSeconds(duration))
+
+        avPlayer.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] (time) -> Void in
+            self?.currentDurationLbl.text = self?.getFormatedDateString(duration: time)
+            self?.updateSlider(duration: time)
+        }
     }
     
     func setUpControlsView() {
@@ -119,47 +108,40 @@ public class TvOSAVPlayer: UIView {
         let buttonSize = playBackControlsView.bounds.size.height * 0.5
         let buttonXPosition = (playBackControlsView.bounds.size.width - buttonSize) / 2
         let buttonYPosition = (playBackControlsView.bounds.size.height - buttonSize) / 2
-                
-        let picture = Bundle.module.path(forResource: "pause", ofType: "png")
-        let bundle = Bundle()
-        
-        for framework in Bundle.allFrameworks {
-            print("bundle path: \(framework.bundleIdentifier)")
-            if framework.bundleIdentifier == "TvOSAVPlayer" {
-//                bundle = framework.bundlePath
-                print("framework")
-            }
+
+        if #available(tvOS 13.0, *) {
+            playImage = UIImage(systemName: "play")
+            pauseImage = UIImage(systemName: "pause")
+            forwardImage = UIImage(systemName: "goforward.10")
+            backwardImage = UIImage(systemName: "gobackward.10")
+            fullScreenImage = UIImage(systemName: "viewfinder")
         }
-        
+
         playOrPauseButton = UIButton(type: .custom)
         playOrPauseButton.frame = CGRect(x: buttonXPosition, y: buttonYPosition, width: buttonSize, height: buttonSize)
-        playOrPauseButton.setBackgroundImage(UIImage(named: "pause", in: nil, compatibleWith: nil), for: .normal)
-        playOrPauseButton.addTarget(self, action: #selector(playPauseAction(_:)), for: .primaryActionTriggered)
-        playOrPauseButton.backgroundColor = UIColor.red
+        playOrPauseButton.setBackgroundImage(pauseImage, for: .normal)
+        playOrPauseButton.addTarget(self, action: #selector(playPauseAction), for: .primaryActionTriggered)
         playBackControlsView.addSubview(playOrPauseButton)
 
         tenSecBackwardButton = UIButton(type: .custom)
         tenSecBackwardButton.frame = CGRect(x: buttonXPosition - buttonSize - 30, y: buttonYPosition, width: buttonSize, height: buttonSize)
-        tenSecBackwardButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
-        tenSecBackwardButton.addTarget(self, action: #selector(tenSecBackwardAction(_:)), for: .primaryActionTriggered)
-        tenSecBackwardButton.backgroundColor = UIColor.green
+        tenSecBackwardButton.setBackgroundImage(backwardImage, for: .normal)
+        tenSecBackwardButton.addTarget(self, action: #selector(tenSecBackwardAction), for: .primaryActionTriggered)
         playBackControlsView.addSubview(tenSecBackwardButton)
 
         tenSecForwardButton = UIButton(type: .custom)
         tenSecForwardButton.frame = CGRect(x: buttonXPosition + buttonSize + 30, y: buttonYPosition, width: buttonSize, height: buttonSize)
-        tenSecForwardButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
-        tenSecForwardButton.addTarget(self, action: #selector(tenSecForwardAction(_:)), for: .primaryActionTriggered)
-        tenSecForwardButton.backgroundColor = UIColor.orange
+        tenSecForwardButton.setBackgroundImage(forwardImage, for: .normal)
+        tenSecForwardButton.addTarget(self, action: #selector(tenSecForwardAction), for: .primaryActionTriggered)
         playBackControlsView.addSubview(tenSecForwardButton)
-        
+
         fullScreenButton = UIButton(type: .custom)
         fullScreenButton.frame = CGRect(x: playBackControlsView.bounds.size.width - buttonSize - 20 , y: buttonYPosition, width: buttonSize, height: buttonSize)
-        fullScreenButton.setBackgroundImage(UIImage(named: "pause"), for: .normal)
-        fullScreenButton.addTarget(self, action: #selector(tenSecForwardAction(_:)), for: .primaryActionTriggered)
-        fullScreenButton.backgroundColor = UIColor.orange
+        fullScreenButton.setBackgroundImage(fullScreenImage, for: .normal)
+        fullScreenButton.addTarget(self, action: #selector(fullScreenAction), for: .primaryActionTriggered)
         playBackControlsView.addSubview(fullScreenButton)
     }
-    
+
     func setUpSeekBarControls() {
         
         let yPosition = controlsView.bounds.size.height * 0.56
@@ -169,7 +151,7 @@ public class TvOSAVPlayer: UIView {
 
         let lblYPosition = (seekBarControlsView.bounds.size.height - 30) / 2
         currentDurationLbl = UILabel(frame: CGRect(x: 30, y: lblYPosition, width: 100, height: 30))
-        currentDurationLbl.text = "00:10:00"
+        currentDurationLbl.text = "00:00"
         currentDurationLbl.textColor = UIColor.lightGray
         currentDurationLbl.textAlignment = .center
         currentDurationLbl.font = UIFont.systemFont(ofSize: 24)
@@ -197,64 +179,6 @@ public class TvOSAVPlayer: UIView {
         seekBarControlsView.addSubview(seekBarSlider)
     }
 
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        seekBarSlider.addTarget(self, action: #selector(sliderValueChanges(_:)), for: .valueChanged)
-        seekBarSlider.minimumValue = 0
-        seekBarSlider.maximumValue = 100
-        seekBarSlider.stepValue = 1//0.10
-        seekBarSlider.minimumTrackTintColor = .lightGray
-        seekBarSlider.maximumTrackTintColor = .white
-        seekBarSlider.thumbTintColor = .lightGray
-        seekBarSlider.backgroundColor = UIColor.clear
-    }
-
-    private func loadViewFromNib() -> TvOSAVPlayer? {
-        let bundle = Bundle(identifier: "TvOSAVPlayer") //Bundle(for: TvOSAVPlayer.self)
-        print("bundle: \(String(describing: bundle))")
-        let nib = UINib(nibName: "\(TvOSAVPlayer.self)", bundle: bundle)
-        let nibView = nib.instantiate(withOwner: self, options: nil).first as! TvOSAVPlayer
-        
-        let playerItem = AVPlayerItem(url: fileURL!)
-        let player = AVPlayer(playerItem: playerItem)
-        let playerLayer = nibView.avPlayerView.layer as! AVPlayerLayer
-        playerLayer.player = player
-        player.play()
-
-        let duration: CMTime = playerItem.asset.duration
-
-        nibView.totalDurationLbl.text = getFormatedDateString(duration: duration)
-        nibView.currentDurationLbl.text = "00:00:00"
-
-        nibView.seekBarSlider.maximumValue = Float(CMTimeGetSeconds(duration))
-
-        player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] (time) -> Void in
-            nibView.currentDurationLbl.text = self?.getFormatedDateString(duration: time)
-            self?.updateSlider(duration: time)
-        }
-
-        return nibView
-    }
-
-    @objc func sliderValueChanges(_ slider: TvOSSlider) {
-        
-        var newTime = 0.0
-        if slider.value > self.currentValue {
-            newTime = Float64(slider.value) + seekDuration
-        } else {
-            newTime = Float64(slider.value) - seekDuration
-        }
-
-        if let view = self.subviews.first as? AVPlayerView {
-            if let playerLayer = view.layer as? AVPlayerLayer {
-                let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
-                playerLayer.player?.seek(to: time)
-                playerLayer.player?.play()
-            }
-        }
-    }
-    
     override public func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         
         guard context.nextFocusedView != nil else {
@@ -264,10 +188,36 @@ public class TvOSAVPlayer: UIView {
         context.nextFocusedView?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         context.previouslyFocusedView?.transform = CGAffineTransform(scaleX: 1, y: 1)
     }
+    
+    override public func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+       guard let buttonPress = presses.first?.type else { return }
+
+       switch(buttonPress) {
+       case .playPause:
+          print("Play/Pause")
+        playPauseAction()
+       default:
+        print("default action")
+        }
+    }
 }
 
 extension TvOSAVPlayer {
     
+    @objc func sliderValueChanges(_ slider: TvOSSlider) {
+        
+        var newTime = 0.0
+        if slider.value > self.currentValue {
+            newTime = Float64(slider.value) + seekDuration
+        } else {
+            newTime = Float64(slider.value) - seekDuration
+        }
+        
+        let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
+        avPlayer.seek(to: time)
+        avPlayer.play()
+    }
+
     func getFormatedDateString(duration: CMTime) -> String {
 
         let totalSeconds = CMTimeGetSeconds(duration)
@@ -283,39 +233,26 @@ extension TvOSAVPlayer {
     }
     
     func updateSlider(duration: CMTime) {
-        if let view = self.subviews.first as? TvOSAVPlayer {
-            view.seekBarSlider.value = Float(CMTimeGetSeconds(duration))
-            view.currentValue = Float(CMTimeGetSeconds(duration))
-        }
+        seekBarSlider.value = Float(CMTimeGetSeconds(duration))
+        currentValue = Float(CMTimeGetSeconds(duration))
     }
 
-    @objc func playPauseAction(_ sender: Any) {
-        
+    @objc func playPauseAction() {
+
         playingStatus = !playingStatus
 
-//        let bundle = Bundle(for: TvOSAVPlayer.self)
-        let bundle = Bundle(identifier: "TvOSAVPlayer")
-        
-        guard let avPlayerLayer = self.avPlayerView.layer as? AVPlayerLayer else {
-            return
-        }
-
         if playingStatus == true {
-            playOrPauseButton.setBackgroundImage(UIImage(named: "pause", in: bundle, compatibleWith: nil), for: .normal)
-            avPlayerLayer.player?.play()
+            playOrPauseButton.setBackgroundImage(pauseImage, for: .normal)
+            avPlayer.play()
         } else {
-            playOrPauseButton.setBackgroundImage(UIImage(named: "play", in: bundle, compatibleWith: nil), for: .normal)
-            avPlayerLayer.player?.pause()
+            playOrPauseButton.setBackgroundImage(playImage, for: .normal)
+            avPlayer.pause()
         }
     }
 
-    @objc func tenSecBackwardAction(_ sender: Any) {
-
-        guard let avPlayerLayer = self.avPlayerView.layer as? AVPlayerLayer else {
-            return
-        }
+    @objc func tenSecBackwardAction() {
         
-        let playerCurrentTime = CMTimeGetSeconds((avPlayerLayer.player?.currentTime())!)
+        let playerCurrentTime = CMTimeGetSeconds(avPlayer.currentTime())
         var newTime = playerCurrentTime - seekDuration
 
         if newTime < 0 {
@@ -323,27 +260,25 @@ extension TvOSAVPlayer {
         }
 
         let time2: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
-        avPlayerLayer.player?.seek(to: time2)
+        avPlayer.seek(to: time2)
     }
-    
-    @objc func tenSecForwardAction(_ sender: Any) {
-        guard let avPlayerLayer = self.avPlayerView.layer as? AVPlayerLayer else {
-            return
-        }
-        
-        guard let duration  = avPlayerLayer.player?.currentItem?.duration else{
+
+    @objc func tenSecForwardAction() {
+
+        guard let duration  = avPlayer.currentItem?.duration else {
             return
         }
 
-        let playerCurrentTime = CMTimeGetSeconds((avPlayerLayer.player?.currentTime())!)
+        let playerCurrentTime = CMTimeGetSeconds(avPlayer.currentTime())
         let newTime = playerCurrentTime + seekDuration
 
         if newTime < CMTimeGetSeconds(duration) {
             let time2: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
-            avPlayerLayer.player?.seek(to: time2)
+            avPlayer.seek(to: time2)
         }
     }
-    
-    @objc func fullScreenAction(_ sender: Any) {
+
+    @objc func fullScreenAction() {
+        print("full screen action")
     }
 }
