@@ -3,7 +3,7 @@
 This library provides an media player support in tvOS with default controls like Play/Pause, Go forward/backward for 10 secs, Full Screen and SeekBar.
 
 ## Installation
----
+
 Currently, there is one way to use TvOSplayer in your project:
 
 - using Swift Package Manager
@@ -16,7 +16,7 @@ TvOSAvPlayer support SwiftPM from version 5.1.0. To use SwiftPM, you should use 
 After select the package, you can choose the dependency type (tagged version, branch or commit). Then Xcode will setup all the stuff for you.
 
 ### How To Use
----
+
 - Swift
 ``` swift
 import TvOSAVPlayer
@@ -26,5 +26,5 @@ self.view.addSubview(avPlayer)
 ```
 
 ## Author
----
+
 - Ganesh kumar
