@@ -28,7 +28,8 @@ public class TvOSAVPlayer: UIView {
     var fileURL: URL!
     var enableControls: Bool = true
     var playingStatus: Bool = true
-    
+    var fullScreenStatus: Bool = false
+
     fileprivate let seekDuration: Float64 = 10
     fileprivate var currentValue: Float = 0
 
@@ -52,6 +53,12 @@ public class TvOSAVPlayer: UIView {
         setUpView(fileUrl: fileUrl)
     }
     
+    public func play(with videoUrl: URL) {
+        
+        self.fileURL = videoUrl
+        setUpView(fileUrl: videoUrl)
+    }
+    
     func setUpView(fileUrl: URL) {
         containerView = UIView(frame: self.bounds)
         containerView.backgroundColor = UIColor.lightGray
@@ -70,6 +77,7 @@ public class TvOSAVPlayer: UIView {
         avPlayer = AVPlayer(playerItem: playerItem)
         let playerLayer = avPlayerView.layer as! AVPlayerLayer
         playerLayer.player = avPlayer
+        playerLayer.videoGravity = .resizeAspectFill
         avPlayer.play()
 
         let duration: CMTime = playerItem.asset.duration
@@ -87,17 +95,23 @@ public class TvOSAVPlayer: UIView {
     
     func setUpControlsView() {
         
-        let viewWidth: CGFloat = containerView.bounds.size.width * 0.498437
+        let viewWidth: CGFloat = containerView.bounds.size.width * 0.8
         let viewHeight: CGFloat = containerView.bounds.size.height * 0.13888
         let xPosition: CGFloat = (containerView.bounds.size.width - viewWidth) / 2
         let yPosition: CGFloat = containerView.bounds.size.height - viewHeight - 50
         controlsView = UIView(frame: CGRect(x: xPosition, y: yPosition, width: viewWidth, height: viewHeight))
-        controlsView.backgroundColor = UIColor.darkGray
+        controlsView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.65)
         containerView.addSubview(controlsView)
         
         setUpPlayBackControls()
         setUpSeekBarControls()
+        
+//        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hideControlsView), userInfo: nil, repeats: true)
     }
+    
+//    @objc func hideControlsView() {
+//        controlsView.isHidden = true
+//    }
     
     func setUpPlayBackControls() {
         
@@ -140,6 +154,12 @@ public class TvOSAVPlayer: UIView {
         fullScreenButton.setBackgroundImage(fullScreenImage, for: .normal)
         fullScreenButton.addTarget(self, action: #selector(fullScreenAction), for: .primaryActionTriggered)
         playBackControlsView.addSubview(fullScreenButton)
+        
+        if self.bounds == UIScreen.main.bounds {
+            fullScreenButton.isEnabled = false
+        } else {
+            fullScreenButton.isEnabled = true
+        }
     }
 
     func setUpSeekBarControls() {
@@ -199,6 +219,8 @@ public class TvOSAVPlayer: UIView {
        default:
         print("default action")
         }
+        
+//        controlsView.isHidden = false
     }
 }
 
@@ -215,7 +237,6 @@ extension TvOSAVPlayer {
         
         let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
         avPlayer.seek(to: time)
-        avPlayer.play()
     }
 
     func getFormatedDateString(duration: CMTime) -> String {

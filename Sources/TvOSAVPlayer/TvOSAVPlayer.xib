@@ -19,7 +19,7 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENa-oy-83K">
-                    <rect key="frame" x="481.5" y="820" width="957" height="150"/>
+                    <rect key="frame" x="192" y="820" width="1536" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:10:02" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgG-jF-su4">
                             <rect key="frame" x="30" y="105.5" width="94" height="28"/>
@@ -28,7 +28,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02:10:02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ef9-R0-pj9">
-                            <rect key="frame" x="827" y="105.5" width="100" height="28"/>
+                            <rect key="frame" x="1406" y="105.5" width="100" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="RA3-fL-z4o"/>
                             </constraints>
@@ -37,21 +37,21 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxH-jw-MJW" customClass="TvOSSlider" customModule="TvOSAVPlayer" customModuleProvider="target">
-                            <rect key="frame" x="164" y="104" width="623" height="31"/>
+                            <rect key="frame" x="164" y="104" width="1202" height="31"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iuw-hF-aiS">
-                            <rect key="frame" x="10" y="10" width="937" height="84"/>
+                            <rect key="frame" x="10" y="10" width="1516" height="84"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjL-rz-NvQ">
-                                    <rect key="frame" x="367.5" y="17" width="50" height="50"/>
+                                    <rect key="frame" x="657" y="17" width="50" height="50"/>
                                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                     <state key="normal" backgroundImage="10secBackward">
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSu-me-jl5">
-                                    <rect key="frame" x="447.5" y="21" width="42" height="42"/>
+                                    <rect key="frame" x="737" y="21" width="42" height="42"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="TSu-me-jl5" secondAttribute="height" multiplier="1:1" id="8ga-Rx-Z6T"/>
                                     </constraints>
@@ -61,14 +61,14 @@
                                     </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khB-3X-Sdd">
-                                    <rect key="frame" x="519.5" y="17" width="50" height="50"/>
+                                    <rect key="frame" x="809" y="17" width="50" height="50"/>
                                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                     <state key="normal" backgroundImage="10secForward">
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0Y-95-YqV">
-                                    <rect key="frame" x="875" y="21" width="42" height="42"/>
+                                    <rect key="frame" x="1454" y="21" width="42" height="42"/>
                                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                     <state key="normal" backgroundImage="fullScreen">
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -95,7 +95,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="hxH-jw-MJW" secondAttribute="bottom" constant="15" id="6I2-3X-eSA"/>
                         <constraint firstItem="hxH-jw-MJW" firstAttribute="top" secondItem="Iuw-hF-aiS" secondAttribute="bottom" constant="10" id="AUD-E1-a51"/>
@@ -125,7 +125,7 @@
                 <constraint firstItem="ENa-oy-83K" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.13888" id="Rtb-kE-KwG"/>
                 <constraint firstItem="aNr-fJ-VRo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UGK-IA-QlX"/>
                 <constraint firstItem="ENa-oy-83K" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VzK-M6-euw"/>
-                <constraint firstItem="ENa-oy-83K" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.498437" id="XXa-cQ-cWK"/>
+                <constraint firstItem="ENa-oy-83K" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="XXa-cQ-cWK"/>
                 <constraint firstItem="aNr-fJ-VRo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yVu-Lk-iO4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Pmt-tb-8Ig"/>
